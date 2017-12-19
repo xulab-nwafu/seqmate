@@ -1,0 +1,15 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+my $id_file = shift;
+my $data_file = shift;
+
+open (ID, $id_file) or die $!;
+while (<ID>) {
+	chomp;
+	next if /^\*$/;
+	system("grep $_ $data_file");
+}
+close ID;

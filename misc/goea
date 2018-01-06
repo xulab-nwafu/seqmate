@@ -30,8 +30,8 @@ my $app = "$home/sf/ontologizer/latest/Ontologizer.jar";
 my $obo = "$home/db/gene_ontology/current/go-basic.obo";
 my $ann = "$home/db/gene_ontology/current/FG.RR.27.GO.ids";
 my $pop = "$home/db/gene_ontology/current/FG.RR.27.gene.txt";
-my $cal = "Parent-Child-Union";
-my $mtc = "Benjamini-Hochberg";
+my $cal = $ARGV[1] || "Parent-Child-Union";
+my $mtc = $ARGV[2] || "Benjamini-Hochberg";
 
 my $goea_log = `java -jar $app -g $obo -a $ann -c "$cal" -m "$mtc" -r 1000 -d 0.05 -i -n -p $pop -s $id_list_full -o $outdir 2>&1`;
 my $dot_log1 = `dot -Tpng $outdir/view-$id_list-$cal-$mtc.dot -o$outdir/$id_list.png 2>&1`;
